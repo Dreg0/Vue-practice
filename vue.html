@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .color-red{color:red;}
+        .color-blue{color:blue;}
+        .is-loading{background: red;}
+        .is-disabled{}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1>
+            {{reversedMessage}}
+        </h1>
+
+        <h2>all tasks</h2>
+    <ul>
+     <li v-for="task in tasks" v-text="task.description"></li>
+    </ul>
+
+        <h2>incomplete tasks</h2>
+    <ul>
+        <li v-for="task in incompleteTasks" v-text="task.description"></li>
+    </ul>
+    <!-- <ul>
+        <li v-for = "name in names" v-text="name"></li>
+    </ul>
+    <input id="input" type="text" v-model="newName" @keyup.enter="addName">
+    <button @click="addName">Add name</button> -->
+    <!-- <button :title='title' :class="{ 'is-loading':isLoading }" @click="toggleClass"> Hover over me</button>    -->
+   <!-- <h1 :class="className">Hello word</h1> -->
+   <!-- <button :disabled="isDisabled" @click="changeClass">Click me</button> -->
+</div>
+
+    
+    <script src="https://unpkg.com/vue@2.4.3/dist/vue.js"></script>
+    
+    <script>
+        // var app = new Vue({
+        //     el: '#root',
+
+        //     data: {
+        //         newName:'',
+
+        //         names:['Joe', 'Marry', 'Jane', 'Jack']
+        //     },
+
+        //     methods: {
+        //         addName() {
+        //             this.names.push(this.newName)
+        //             this.newName="";
+        //         }
+        //     }
+        // });
+    // document.querySelector('#input').value = data.message
+    // document.querySelector('#button').addEventListener('click', ()=> {
+    //   let name = document.querySelector("#input");
+    //   app.names.push(name.value);
+
+    //   name.value= "";
+    // });
+
+var app = new Vue ({
+    el:'#root',
+    data:{
+        title:" Now the title is being set by a JS",
+        isLoading:false,
+        isDisabled:false,
+        message:"Hello word",
+
+        tasks:[
+            { description:'go to store', completed:true},
+            { description:'make donation', completed:false},
+            { description:'clean', completed:false},
+            { description:'go for a walk', completed:false},
+            { description:'finish lesson', completed:true},
+            
+            ]
+    },
+
+    computed:{
+        reversedMessage(){
+            return this.message.split('').reverse('').join('');
+            
+        },
+        incompleteTasks(){
+            return this.tasks.filter(task => ! task.completed);
+                
+            }
+        
+    },
+
+    methods: {
+        toggleClass(){
+            this.isLoading = true;
+        },
+        changeClass(){
+            this.isDisabled = true;
+        }
+    }
+});
+
+
+    </script>
+</body>
+</html>
